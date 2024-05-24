@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jsoup.Jsoup;
+import static net.runelite.client.util.Text.removeTags;
 
 @Slf4j
 @PluginDescriptor(
@@ -63,7 +63,11 @@ public class ClickToMinimizePlugin extends Plugin
 	{
 		Map<String, List<String>> actionsMap = parseActions(config.actions());
 		String action = event.getMenuOption();
-		String target = Jsoup.parse(event.getMenuTarget()).text();
+		String target = removeTags(event.getMenuTarget());
+
+		System.out.println("Event: " + event);
+		System.out.println("Action: " + action);
+		System.out.println("Target: " + target);
 
 		for (Map.Entry<String, List<String>> entry : actionsMap.entrySet()) {
 			String configAction = entry.getKey();
