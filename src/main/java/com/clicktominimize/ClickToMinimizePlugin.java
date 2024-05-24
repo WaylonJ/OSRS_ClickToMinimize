@@ -13,8 +13,12 @@ import net.runelite.client.plugins.PluginDescriptor;
 import javax.swing.JFrame;
 import java.awt.Frame;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.jsoup.Jsoup;
 
 @Slf4j
 @PluginDescriptor(
@@ -40,13 +44,15 @@ public class ClickToMinimizePlugin extends Plugin
 		log.info("Click To Minimize stopped!");
 	}
 
-	public Map<String, String> parseActions(String actionConfig) {
-		Map<String, String> actionsMap = new HashMap<>();
+	public Map<String, List<String>> parseActions(String actionConfig) {
+		Map<String, List<String>> actionsMap = new HashMap<>();
 		String[] actions = actionConfig.split(",");
 		for (String action : actions) {
 			String[] parts = action.trim().split(":");
 			if (parts.length == 2) {
-				actionsMap.put(parts[0].trim(), parts[1].trim());
+				String key = parts[0].trim();
+				String value = parts[1].trim();
+				actionsMap.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
 			}
 		}
 		return actionsMap;
@@ -55,17 +61,25 @@ public class ClickToMinimizePlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
-		Map<String, String> actionsMap = parseActions(config.actions());
+		Map<String, List<String>> actionsMap = parseActions(config.actions());
 		String action = event.getMenuOption();
-		String target = event.getMenuTarget();
+		String target = Jsoup.parse(event.getMenuTarget()).text();
 
-		for (Map.Entry<String, String> entry : actionsMap.entrySet()) {
-			if (action.equals(entry.getKey()) && target.contains(entry.getValue())) {
-				minimizeWindow();
-				break;
+		for (Map.Entry<String, List<String>> entry : actionsMap.entrySet()) {
+			String configAction = entry.getKey();
+			List<String> configTargets = entry.getValue();
+
+			if (action.equals(configAction)) {
+				for (String configTarget : configTargets) {
+					if (target.contains(configTarget)) {
+						minimizeWindow();
+						return;
+					}
+				}
 			}
 		}
 	}
+
 
 	private void minimizeWindow() {
 		JFrame frame = (JFrame) javax.swing.SwingUtilities.getWindowAncestor(client.getCanvas());
