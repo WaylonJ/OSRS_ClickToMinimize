@@ -65,10 +65,6 @@ public class ClickToMinimizePlugin extends Plugin
 		String action = event.getMenuOption();
 		String target = removeTags(event.getMenuTarget());
 
-		System.out.println("Event: " + event);
-		System.out.println("Action: " + action);
-		System.out.println("Target: " + target);
-
 		for (Map.Entry<String, List<String>> entry : actionsMap.entrySet()) {
 			String configAction = entry.getKey();
 			List<String> configTargets = entry.getValue();
