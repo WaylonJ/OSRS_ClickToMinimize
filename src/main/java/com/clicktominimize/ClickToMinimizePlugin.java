@@ -79,6 +79,7 @@ public class ClickToMinimizePlugin extends Plugin
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
 		boolean ignoreCase = config.ignoreCase();
+		boolean checkNoTargets = config.checkNoTargets();
 		Map<String, List<String>> actionsMap = parseActions(config.actions(), ignoreCase);
 		String action = ignoreCase ? event.getMenuOption().toLowerCase() : event.getMenuOption();
 		String target = ignoreCase ? removeTags(event.getMenuTarget()).toLowerCase() : removeTags(event.getMenuTarget());
@@ -89,7 +90,7 @@ public class ClickToMinimizePlugin extends Plugin
 
 			if (action.equals(configAction)) {
 				for (String configTarget : configTargets) {
-					if (target.contains(configTarget)) {
+					if (target.contains(configTarget) || (checkNoTargets && target.isEmpty())) {
 						minimizeWindow();
 						return;
 					}
