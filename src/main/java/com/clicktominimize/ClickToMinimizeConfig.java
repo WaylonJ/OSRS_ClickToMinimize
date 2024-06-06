@@ -35,10 +35,10 @@ public interface ClickToMinimizeConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "ignoreFullInventory",
-			name = "Don't Minimize on Full Inventory",
-			description = "If enabled, will not minimize window whenever the inventory is completely full.",
-			position = 3
+		keyName = "ignoreFullInventory",
+		name = "Don't Minimize on Full Inventory",
+		description = "If enabled, will not minimize window whenever the inventory is completely full.",
+		position = 3
 	)
 	default boolean ignoreFullInventory()
 	{
@@ -46,10 +46,10 @@ public interface ClickToMinimizeConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "checkNoTargets",
-			name = "Check for No Targets",
-			description = "Mainly used for menu options, e.g. at the grand exchange. Using 'Confirm: x' will make it so that when you press the confirm after inputting a trade, it will minimize.",
-			position = 4
+		keyName = "checkNoTargets",
+		name = "Check for No Targets",
+		description = "Mainly used for menu options, e.g. at the grand exchange. Using 'Confirm: x' will make it so that when you press the confirm after inputting a trade, it will minimize.",
+		position = 4
 	)
 	default boolean checkNoTargets()
 	{
