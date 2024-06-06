@@ -19,7 +19,8 @@ public interface ClickToMinimizeConfig extends Config
 		return "Pick-Fruit: Sq'irk tree, \n" +
 				"Mine: Crashed Star, \n" +
 				"Bait: Rod Fishing spot,\n" +
-				"Use: Hammer -> Infernal eel,";
+				"Use: Hammer -> Infernal eel,\n" +
+				"Make: yew longbow,";
 	}
 
 	@ConfigItem(
@@ -29,17 +30,6 @@ public interface ClickToMinimizeConfig extends Config
 		position = 2
 	)
 	default boolean ignoreCase()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-			keyName = "checkNoTargets",
-			name = "Check for No Targets",
-			description = "Mainly used for menu options, e.g. at the grand exchange. Using 'Confirm: x' will make it so that when you press the confirm after inputting a trade, it will minimize.",
-			position = 2
-	)
-	default boolean checkNoTargets()
 	{
 		return true;
 	}
@@ -56,10 +46,21 @@ public interface ClickToMinimizeConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "checkNoTargets",
+			name = "Check for No Targets",
+			description = "Mainly used for menu options, e.g. at the grand exchange. Using 'Confirm: x' will make it so that when you press the confirm after inputting a trade, it will minimize.",
+			position = 4
+	)
+	default boolean checkNoTargets()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "minimizeKeybind",
 		name = "Minimize Keybind",
 		description = "Keybind to minimize the screen",
-		position = 4
+		position = 5
 	)
 	default Keybind minimizeKeybind()
 	{
