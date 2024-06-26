@@ -99,16 +99,9 @@ public class ClickToMinimizePlugin extends Plugin
 		}
 	}
 
-	public boolean isInventoryFull()
-	{
-		Item[] items = client.getItemContainer(InventoryID.INVENTORY).getItems();
-
-		for (Item item : items) {
-			if (item == null || item.getId() == -1) {
-				return false;
-			}
-		}
-		return true;
+	public boolean isInventoryFull() {
+		int itemCount = client.getItemContainer(InventoryID.INVENTORY).count();
+		return itemCount >= 28;
 	}
 
 	public void minimizeWindow() {
