@@ -87,7 +87,6 @@ public class ClickToMinimizePlugin extends Plugin
 	{
 		if (keyListener.isPreventMinimizeHeld())
 		{
-			log.info("Prevent Minimize key is held, not minimizing window.");
 			return; // Exit early if the key is held
 		}
 
@@ -135,9 +134,9 @@ public class ClickToMinimizePlugin extends Plugin
 		if (frame != null) {
 			frame.setState(Frame.ICONIFIED);
 
-			long currentTime = System.currentTimeMillis();
+			long currentTime = System.nanoTime();
 			// Check if enough time has passed since the last message (5 seconds)
-			if (config.sendChatMessage() && (currentTime - lastMessageTime) >= 5000) {
+			if (config.sendChatMessage() && (currentTime - lastMessageTime) >= 5_000_000_000L) {
 				chatMessageManager.queue(QueuedMessage.builder()
 						.type(ChatMessageType.GAMEMESSAGE)
 						.runeLiteFormattedMessage("Window has been minimized by the Click To Minimize plugin.")

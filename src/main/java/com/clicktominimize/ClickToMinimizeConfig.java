@@ -12,16 +12,18 @@ public interface ClickToMinimizeConfig extends Config
 		keyName = "Actions",
 		name = "List of Actions to Minimize",
 		description = "Enter actions in the format 'Action: Target, Action: Target." +
-			", E.g. \n'Pick-Fruit: Sq'irk tree, \nMine: Crashed Star'"
+			", E.g. <br>'Pick-Fruit: Sq'irk tree, <br>Mine: Crashed Star'"
 	)
 	default String actions()
 	{
-		return "Pick-Fruit: Sq'irk tree, \n" +
-				"Mine: Crashed Star, \n" +
-				"Bait: Rod Fishing spot,\n" +
-				"Use: Hammer -> Infernal eel,\n" +
-				"Make: yew longbow,\n" +
-				"Make: Super defence(3),\n";
+		return "--- Examples: ---, \n" +
+				"#Pick-Fruit: Sq'irk tree, \n" +
+				"#Mine: Crashed Star, \n" +
+				"#Bait: Rod Fishing spot,\n" +
+				"#Use: Hammer -> Infernal eel,\n" +
+				"#Make: yew longbow,\n" +
+				"#Make: Super defence(3),\n" +
+				"#Attack: Guard,\n";
 	}
 
 	@ConfigItem(
