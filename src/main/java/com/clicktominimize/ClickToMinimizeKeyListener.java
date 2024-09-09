@@ -1,8 +1,10 @@
 package com.clicktominimize;
 
+import net.runelite.api.KeyCode;
 import net.runelite.client.input.KeyListener;
-import java.awt.event.KeyEvent;
+
 import javax.inject.Inject;
+import java.awt.event.KeyEvent;
 
 public class ClickToMinimizeKeyListener implements KeyListener
 {
@@ -26,13 +28,11 @@ public class ClickToMinimizeKeyListener implements KeyListener
         if (config.minimizeKeybind().matches(e))
         {
             plugin.minimizeWindow();
-            e.consume();
         }
 
         if (config.holdToPreventMinimizeKeybind().matches(e))
         {
             preventMinimize = true; // Set to true when the key is pressed
-            e.consume();
         }
     }
 
@@ -42,7 +42,6 @@ public class ClickToMinimizeKeyListener implements KeyListener
         if (config.holdToPreventMinimizeKeybind().matches(e))
         {
             preventMinimize = false; // Reset when the key is released
-            e.consume();
         }
     }
 

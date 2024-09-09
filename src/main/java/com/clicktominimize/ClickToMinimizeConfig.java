@@ -71,7 +71,7 @@ public interface ClickToMinimizeConfig extends Config
 	@ConfigItem(
 			keyName = "holdToPreventMinimizeKeybind",
 			name = "Hold to Prevent Minimize Keybind",
-			description = "Hold this key to prevent the window from minimizing when clicking.",
+			description = "WARNING: Changing this to shift will prevent 'shift drop' items Hold this key to prevent the window from minimizing when clicking.",
 			position = 6
 	)
 	default Keybind holdToPreventMinimizeKeybind()
