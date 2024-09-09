@@ -78,4 +78,12 @@ public interface ClickToMinimizeConfig extends Config
 	{
 		return Keybind.NOT_SET;
 	}
+
+	@ConfigItem(
+			keyName = "sendChatMessage",
+			name = "Send Chat Message on Minimize",
+			description = "If enabled, a message will be sent to the in-game chat when the window is minimized.",
+			position = 7
+	)
+	default boolean sendChatMessage() { return true; }
 }

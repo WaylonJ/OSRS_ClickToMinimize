@@ -3,10 +3,12 @@ package com.clicktominimize;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.InventoryID;
-import net.runelite.api.Item;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.client.chat.ChatMessageManager;
+import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.input.KeyManager;
@@ -40,6 +42,11 @@ public class ClickToMinimizePlugin extends Plugin
 
 	@Inject
 	private ClickToMinimizeKeyListener keyListener;
+
+	@Inject
+	private ChatMessageManager chatMessageManager;
+
+	private long lastMessageTime = 0;
 
 	@Override
 	protected void startUp() throws Exception
@@ -119,6 +126,18 @@ public class ClickToMinimizePlugin extends Plugin
 		JFrame frame = (JFrame) javax.swing.SwingUtilities.getWindowAncestor(client.getCanvas());
 		if (frame != null) {
 			frame.setState(Frame.ICONIFIED);
+
+			long currentTime = System.currentTimeMillis();
+			// Check if enough time has passed since the last message (5 seconds)
+			if (config.sendChatMessage() && (currentTime - lastMessageTime) >= 5000) {
+				chatMessageManager.queue(QueuedMessage.builder()
+						.type(ChatMessageType.GAMEMESSAGE)
+						.runeLiteFormattedMessage("Window has been minimized by the Click To Minimize plugin.")
+						.build());
+
+				// Update the last message time
+				lastMessageTime = currentTime;
+			}
 		} else {
 			log.warn("No frame found to minimize!");
 		}
