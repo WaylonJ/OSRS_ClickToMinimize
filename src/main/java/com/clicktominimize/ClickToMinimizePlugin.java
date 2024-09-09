@@ -97,6 +97,14 @@ public class ClickToMinimizePlugin extends Plugin
 		String action = ignoreCase ? event.getMenuOption().toLowerCase() : event.getMenuOption();
 		String target = ignoreCase ? removeTags(event.getMenuTarget()).toLowerCase() : removeTags(event.getMenuTarget());
 
+		// Log the player's action if the option is enabled
+		if (config.logPlayerActions()) {
+			chatMessageManager.queue(QueuedMessage.builder()
+					.type(ChatMessageType.GAMEMESSAGE)
+					.runeLiteFormattedMessage("Click To Minimize, logging action on target: \"" + event.getMenuOption() + ": " + event.getMenuTarget() + "\"")
+					.build());
+		}
+
 		for (Map.Entry<String, List<String>> entry : actionsMap.entrySet()) {
 			String configAction = entry.getKey();
 			List<String> configTargets = entry.getValue();

@@ -86,4 +86,12 @@ public interface ClickToMinimizeConfig extends Config
 			position = 7
 	)
 	default boolean sendChatMessage() { return true; }
+
+	@ConfigItem(
+			keyName = "logPlayerActions",
+			name = "Log Player Actions",
+			description = "If enabled, logs every action taken by the player to the game window. This helps to figure out how to enable some actions, as they're not always clear.",
+			position = 8
+	)
+	default boolean logPlayerActions() { return false; }
 }
