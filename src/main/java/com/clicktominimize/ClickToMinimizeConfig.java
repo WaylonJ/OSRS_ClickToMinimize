@@ -11,8 +11,8 @@ public interface ClickToMinimizeConfig extends Config
 	@ConfigItem(
 		keyName = "Actions",
 		name = "List of Actions to Minimize",
-		description = "Enter actions in the format 'Action: Target, Action: Target. Note, capitalization DOES matter" +
-			", E.g. 'Pick-Fruit: Sq'irk tree, Mine: Crashed Star'"
+		description = "Enter actions in the format 'Action: Target, Action: Target." +
+			", E.g. \n'Pick-Fruit: Sq'irk tree, \nMine: Crashed Star'"
 	)
 	default String actions()
 	{
@@ -20,7 +20,8 @@ public interface ClickToMinimizeConfig extends Config
 				"Mine: Crashed Star, \n" +
 				"Bait: Rod Fishing spot,\n" +
 				"Use: Hammer -> Infernal eel,\n" +
-				"Make: yew longbow,";
+				"Make: yew longbow,\n" +
+				"Make: Super defence(3),\n";
 	}
 
 	@ConfigItem(
@@ -63,6 +64,17 @@ public interface ClickToMinimizeConfig extends Config
 		position = 5
 	)
 	default Keybind minimizeKeybind()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "holdToPreventMinimizeKeybind",
+			name = "Hold to Prevent Minimize Keybind",
+			description = "Hold this key to prevent the window from minimizing when clicking.",
+			position = 6
+	)
+	default Keybind holdToPreventMinimizeKeybind()
 	{
 		return Keybind.NOT_SET;
 	}

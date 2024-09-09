@@ -78,6 +78,12 @@ public class ClickToMinimizePlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event)
 	{
+		if (keyListener.isPreventMinimizeHeld())
+		{
+			log.info("Prevent Minimize key is held, not minimizing window.");
+			return; // Exit early if the key is held
+		}
+
 		boolean ignoreCase = config.ignoreCase();
 		boolean checkNoTargets = config.checkNoTargets();
 		Map<String, List<String>> actionsMap = parseActions(config.actions(), ignoreCase);

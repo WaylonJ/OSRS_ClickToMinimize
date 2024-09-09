@@ -12,6 +12,8 @@ public class ClickToMinimizeKeyListener implements KeyListener
     @Inject
     private ClickToMinimizeConfig config;
 
+    private boolean preventMinimize = false; // Add this field
+
     @Override
     public void keyTyped(KeyEvent e)
     {
@@ -26,11 +28,26 @@ public class ClickToMinimizeKeyListener implements KeyListener
             plugin.minimizeWindow();
             e.consume();
         }
+
+        if (config.holdToPreventMinimizeKeybind().matches(e))
+        {
+            preventMinimize = true; // Set to true when the key is pressed
+            e.consume();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-        // No action needed for keyReleased event in this case
+        if (config.holdToPreventMinimizeKeybind().matches(e))
+        {
+            preventMinimize = false; // Reset when the key is released
+            e.consume();
+        }
+    }
+
+    public boolean isPreventMinimizeHeld()
+    {
+        return preventMinimize;
     }
 }
