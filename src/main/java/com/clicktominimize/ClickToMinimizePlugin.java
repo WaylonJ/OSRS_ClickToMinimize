@@ -72,9 +72,9 @@ public class ClickToMinimizePlugin extends Plugin
 		Map<String, List<String>> actionsMap = new HashMap<>();
 		String[] actions = actionConfig.split(",");
 		for (String action : actions) {
-			String[] parts = action.trim().split(":");
+			String[] parts = action.trim().replace("\\:", "[COLON]").split(":");
 			if (parts.length == 2) {
-				String key = ignoreCase ? parts[0].trim().toLowerCase() : parts[0].trim();
+				String key = ignoreCase ? parts[0].trim().replace("[COLON]", ":").toLowerCase() : parts[0].trim().replace("[COLON]", ":");
 				String value = ignoreCase ? parts[1].trim().toLowerCase() : parts[1].trim();
 				actionsMap.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
 			}

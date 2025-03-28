@@ -9,4 +9,4 @@ Pick-Fruit: Sq'irk tree, Mine: Crashed Star
 
 When the client detects you clicked using those actions, it'll minimize immediately. This is really handing when you have runelite "Force" the game focus back on screen for idle notifications.
 
-If you have any suggestions, please let me know. Send me a message on discord is the best way to reach out, "ani_why_force_this" 
+If you have any suggestions, please let me know. Sending me a message on discord is the best way to reach out, "ani_why_force_this" 

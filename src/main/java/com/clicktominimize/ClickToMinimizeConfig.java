@@ -23,7 +23,12 @@ public interface ClickToMinimizeConfig extends Config
 				"#Use: Hammer -> Infernal eel,\n" +
 				"#Make: yew longbow,\n" +
 				"#Make: Super defence(3),\n" +
-				"#Attack: Guard,\n";
+				"#Attack: Guard,\n" +
+				"\n\n" +
+				"--- SPECIAL CASE ---\n" +
+				"If an action has action::target, then " +
+				"you need to add a \\:: to make it work. E.g. \n" +
+				"#Make sets\\:: Cannonballs";
 	}
 
 	@ConfigItem(
@@ -45,7 +50,7 @@ public interface ClickToMinimizeConfig extends Config
 	)
 	default boolean ignoreFullInventory()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
